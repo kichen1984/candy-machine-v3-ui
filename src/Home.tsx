@@ -94,7 +94,9 @@ const Other = styled.div`
 const ImageWrap = styled.div`
   aspect-ratio: 1 / 1;
   width: 100%;
-  background-image: url(https://images.pexels.com/photos/2832432/pexels-photo-2832432.png);
+  background-image: url(https://nxucwuiytclzhsqtbpbwegcllt4x26otbdgtd3iwr6yawqbmfrqa.arweave.net/begrURiYl5PKEwvDYhhLXPl9edMIzTHtFo-wC0AsLGA);
+  background-position: center;
+  background-size: contain;
   border-radius: 16px;
 `
 const Image = styled.div`
@@ -359,7 +361,7 @@ const Home = (props: HomeProps) => {
   });
 
   const { guardLabel, guards, guardStates, prices } = useMemo(() => {
-    const guardLabel = defaultGuardGroup;
+    const guardLabel = "EY";
     return {
       guardLabel,
       guards:
@@ -598,11 +600,11 @@ const Home = (props: HomeProps) => {
             </Column>
             <Column>
               <Content>
-                <CollectionName>Collection Name</CollectionName>
+                <CollectionName>Ones</CollectionName>
                 <InfoRow>
                 {guardStates.isStarted && wallet.publicKey && (
                   <InfoBox>
-                    <p>Total items</p>
+                    <p>Total Ones</p>
                     <p>{candyMachineV3.items.available}{" "}</p>
                   </InfoBox>
                 )} {guardStates.isStarted && wallet.publicKey && (
@@ -612,12 +614,12 @@ const Home = (props: HomeProps) => {
                   </InfoBox>
                 )}
                   <IconRow>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><Globe></Globe></a>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><Twitter></Twitter></a>
-                    <a href="#" target="_blank" rel="noopener noreferrer"><Discord></Discord></a>
+                    <a href="https://www.youtube.com/watch?v=ZZ5LpwO-An4&t=57s" target="_blank" rel="noopener noreferrer"><Globe></Globe></a>
+                    <a href="https://twitter.com/BurgerKichen" target="_blank" rel="noopener noreferrer"><Twitter></Twitter></a>
+                    <a href="https://discord.gg/ddhjJB7d99" target="_blank" rel="noopener noreferrer"><Discord></Discord></a>
                   </IconRow>
                 </InfoRow>
-                <CollectionDescription>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</CollectionDescription>
+                <CollectionDescription>Ones is a Cute Derivatives collection by Burger Nights & kichen.sol.</CollectionDescription>
               </Content>
               <Other>
                 {!guardStates.isStarted ? (
@@ -654,7 +656,7 @@ const Home = (props: HomeProps) => {
                           gatekeeperNetwork={guards.gatekeeperNetwork}
                           connection={connection}
                           cluster={
-                            process.env.NEXT_PUBLIC_SOLANA_NETWORK || "devnet"
+                            process.env.NEXT_PUBLIC_SOLANA_NETWORK || "mainet"
                           }
                           options={{ autoShowModal: false }}
                         >

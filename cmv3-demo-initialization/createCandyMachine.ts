@@ -92,107 +92,55 @@ import { writeFileSync } from "fs";
       },
       guards: {
         botTax: {
-          lamports: sol(0.1337),
+          lamports: sol(0.01),
           lastInstruction: true,
-        },
-        startDate: {
-          date: toDateTime("2022-10-20 18:00:00 +0000"),
-        },
-        endTime: {
-          date: toDateTime("2022-10-20 18:00:00 +0000"),
-        },
       },
       groups: [
         {
-          label: "public", // Public (Mint Limit[1], Redeemed Amount[50])
+          label: "EY",
           guards: {
-            mintLimit: {
-              id: 1,
-              limit: 1,
+            startDate: {
+              date: "2023-02-25 16:00:00 +0000"
             },
-            redeemedAmount: {
-              maximum: toBigNumber(50),
+            endDate: {
+              date: "2023-02-25 17:00:00 +0000"
             },
-          },
-        },
-        {
-          label: "owner", // Owner (Address Gate)
-          guards: {
-            addressGate: {
-              address: demoDestination,
-            },
-          },
-        },
-        {
-          label: "waoed", // Whitelist (Allowlist)
-          guards: {
-            allowList: {
-              merkleRoot: getMerkleRoot(allowList),
-            },
-          },
-        },
-        {
-          label: "_x", // Breading NFT (NFT Burn)
-          guards: {
-            nftBurn: {
-              requiredCollection: demoNftCollection,
-            },
-          },
-        },
-        {
-          label: "_|", // OGs Mint (NFT Gate)
-          guards: {
-            nftGate: {
-              requiredCollection: demoNftCollection,
-            },
-          },
-        },
-        {
-          label: "_>", // Swap NFT (NFT Payment)
-          guards: {
-            nftPayment: {
-              requiredCollection: demoNftCollection,
-              destination: demoDestination,
-            },
-          },
-        },
-        {
-          label: "solPmt", // Premium (Sol Payment)
-          guards: {
-            solPayment: {
-              amount: sol(0.1),
-              destination: demoDestination,
-            },
-          },
-        },
-        {
-          label: "tknBrn", // Token Burn
-          guards: {
             tokenBurn: {
-              amount: token(1, 9),
-              mint: demoTokenMint,
+              amount: 1,
+              mint: "HbDM6SwwvheGrNP74BBt8ch3Pwv5ZXJhmuVq7EfZ2Dau" 
             },
           },
         },
         {
-          label: "tknGte", // Token Gate
-          guards: {
-            tokenGate: {
-              amount: token(1, 9),
-              mint: demoTokenMint,
+          label: "MEAT",
+        guards: {
+          startDate: {
+            date: "2023-02-25 17:01:00 +0000"
+          },
+          endDate: {
+            date: "2023-02-25 18:01:00 +0000"
+          },
+          tokenBurn: {
+            amount: 2500,
+            mint: "Erfp3LkRKugPfWvvDeyfczYW1ELbFqREegMNPhz7J2kv"
+          },
+          redeemedAmount : {
+          maximum: toBigNumber(64),
             },
           },
         },
         {
-          label: "tknPmt", // Token Payment
-          guards: {
-            tokenPayment: {
-              amount: token(1, 9),
-              mint: demoTokenMint,
-              destinationAta: metaplex.tokens().pdas().associatedTokenAccount({
-                mint: demoTokenMint,
-                owner: demoDestination,
-              }),
+          label: "Public",
+        guards: {
+          startDate: {
+            date: "2023-02-25 18:02:00 +0000"
+          },
+          solPayment : {
+          value: 1,
+          destination: "Hq5cCCvm5mvEd5p5WzSLts3cAqfFCGCsnr8PcuBDDAon"
+          },
+          redeemedAmount : {
+          maximum: toBigNumber(82),
             },
           },
         },

@@ -1,14 +1,79 @@
 {
-  "number": 300,
-  "symbol": "F00K",
-  "sellerFeeBasisPoints": 500,
-  "isMutable": true,
+  "size": 82,
+  "symbol": "Ones",
+  "royalties": 200,
   "isSequential": false,
   "creators": [
     {
-      "address": "5PCFZP3pNXxYwWrr84qxm9UMpbmVq7Mi8PM5QKBeQxKQ",
+      "address": "Hq5cCCvm5mvEd5p5WzSLts3cAqfFCGCsnr8PcuBDDAon",
       "share": 100
     }
   ],
-  "uploadMethod": "bundlr"
+  "hiddenSettings": null,
+  "uploadConfig": {
+    "method": "bundlr",
+    "awsConfig": null,
+    "nftStorageAuthToken": null,
+    "pinataConfig": null,
+    "shdwStorageAccount": null
+  },
+  "isMutable": true,
+  "guards": {
+    "default": {
+      "botTax": {
+        "value": 0.01,
+        "lastInstruction": true
+      }
+    },
+    "groups": [
+      {
+        "label": "EY",
+        "guards": {
+          "startDate": {
+            "date": "2023-02-25 16:00:00 +0000"
+          },
+          "endDate": {
+            "date": "2023-02-25 17:00:00 +0000"
+          },
+          "tokenBurn": {
+            "amount": 1,
+            "mint": "HbDM6SwwvheGrNP74BBt8ch3Pwv5ZXJhmuVq7EfZ2Dau"
+          }
+        }
+      },
+      {
+        "label": "MEAT",
+        "guards": {
+          "startDate": {
+            "date": "2023-02-25 17:01:00 +0000"
+          },
+          "endDate": {
+            "date": "2023-02-25 18:01:00 +0000"
+          },
+          "tokenBurn": {
+            "amount": 2500,
+            "mint": "Erfp3LkRKugPfWvvDeyfczYW1ELbFqREegMNPhz7J2kv"
+          },
+          "redeemedAmount" : {
+          "maximum": 64
+          }
+        }
+      },
+      {
+        "label": "Public",
+        "guards": {
+          "startDate": {
+            "date": "2023-02-25 18:02:00 +0000"
+          },
+          "solPayment" : {
+          "value": 1,
+          "destination": "Hq5cCCvm5mvEd5p5WzSLts3cAqfFCGCsnr8PcuBDDAon"
+          },
+          "redeemedAmount" : {
+          "maximum": 82
+          }
+        }
+      }
+    ]
+  }
 }
