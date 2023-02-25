@@ -81,78 +81,92 @@ import { writeFileSync } from "fs";
         }));
     }
   };
-  // Create the Candy Machine.
-  const { candyMachine, candyGuard } = await createOrUpdateCandyMachine(
-    {
-      ...config,
-      itemsAvailable: toBigNumber(number),
-      collection: {
-        address: collectionMint,
-        updateAuthority: key,
-      },
-      guards: {
-        botTax: {
-          lamports: sol(0.01),
-          lastInstruction: true,
-      },
-      groups: [
-        {
-          label: "EY",
-          guards: {
-            startDate: {
-              date: "2023-02-25 16:00:00 +0000"
-            },
-            endDate: {
-              date: "2023-02-25 17:00:00 +0000"
-            },
-            tokenBurn: {
-              amount: 1,
-              mint: "HbDM6SwwvheGrNP74BBt8ch3Pwv5ZXJhmuVq7EfZ2Dau" 
-            },
-          },
+    // Create the Candy Machine.
+    const { candyMachine, candyGuard } = await createOrUpdateCandyMachine(
+      {
+        ...config,
+        itemsAvailable: toBigNumber(number),
+        collection: {
+          address: collectionMint,
+          updateAuthority: key,
         },
-        {
-          label: "MEAT",
         guards: {
-          startDate: {
-            date: "2023-02-25 17:01:00 +0000"
-          },
-          endDate: {
-            date: "2023-02-25 18:01:00 +0000"
-          },
-          tokenBurn: {
-            amount: 2500,
-            mint: "Erfp3LkRKugPfWvvDeyfczYW1ELbFqREegMNPhz7J2kv"
-          },
-          redeemedAmount : {
-          maximum: toBigNumber(64),
-            },
+          botTax: {
+            lamports: sol(0.0100),
+            lastInstruction: true,
           },
         },
-        {
-          label: "Public",
-        guards: {
-          startDate: {
-            date: "2023-02-25 18:02:00 +0000"
+        "groups": [
+          {
+            "label": "EY",
+            "guards": {
+              "startDate": {
+                "date": "2023-02-25 16:00:00 +0000"
+              },
+              "endDate": {
+                "date": "2023-02-25 17:00:00 +0000"
+              },
+              "tokenBurn": {
+                "amount": 1,
+                "mint": "HbDM6SwwvheGrNP74BBt8ch3Pwv5ZXJhmuVq7EfZ2Dau"
+              }
+            }
           },
-          solPayment : {
-          value: 1,
-          destination: "Hq5cCCvm5mvEd5p5WzSLts3cAqfFCGCsnr8PcuBDDAon"
+          {
+            "label": "MEAT",
+            "guards": {
+              "startDate": {
+                "date": "2023-02-25 17:01:00 +0000"
+              },
+              "endDate": {
+                "date": "2023-02-25 18:01:00 +0000"
+              },
+              "tokenBurn": {
+                "amount": 2500,
+                "mint": "Erfp3LkRKugPfWvvDeyfczYW1ELbFqREegMNPhz7J2kv"
+              },
+              "redeemedAmount" : {
+              "maximum": 64
+              }
+            }
           },
-          redeemedAmount : {
-          maximum: toBigNumber(82),
+          {
+            "label": "Public",
+            "guards": {
+              "startDate": {
+                "date": "2023-02-25 18:02:00 +0000"
+              },
+              "solPayment" : {
+              "value": 1,
+              "destination": "Hq5cCCvm5mvEd5p5WzSLts3cAqfFCGCsnr8PcuBDDAon"
+              },
+              "redeemedAmount" : {
+              "maximum": 82
+              },
             },
           },
-        },
-      ],
-    },
-    cache.program || {}
-  );
-  cache.program = {
-    candyMachine: candyMachine.toString(),
-    candyGuard: candyGuard.toString(),
-    candyMachineCreator: key.publicKey.toString(),
-    collectionMint: collectionMint.toString(),
-  };
-  writeFileSync("./cache.json", JSON.stringify(cache, null, 2));
-})();
+          {
+            label: "tknPmt", // Token Payment
+            guards: {
+              tokenPayment: {
+                amount: token(1, 9),
+                mint: demoTokenMint,
+                destinationAta: metaplex.tokens().pdas().associatedTokenAccount({
+                  mint: demoTokenMint,
+                  owner: demoDestination,
+                }),
+              },
+            },
+          },
+        ],
+      },
+      cache.program || {}
+    );
+    cache.program = {
+      candyMachine: candyMachine.toString(),
+      candyGuard: candyGuard.toString(),
+      candyMachineCreator: key.publicKey.toString(),
+      collectionMint: collectionMint.toString(),
+    };
+    writeFileSync("./cache.json", JSON.stringify(cache, null, 2));
+  })();
