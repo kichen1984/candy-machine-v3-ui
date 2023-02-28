@@ -361,7 +361,7 @@ const Home = (props: HomeProps) => {
   });
 
   const { guardLabel, guards, guardStates, prices } = useMemo(() => {
-    const guardLabel = "EY";
+    const guardLabel = "MEAT";
     return {
       guardLabel,
       guards:
