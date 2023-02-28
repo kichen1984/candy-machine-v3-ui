@@ -361,7 +361,7 @@ const Home = (props: HomeProps) => {
   });
 
   const { guardLabel, guards, guardStates, prices } = useMemo(() => {
-    const guardLabel = "public";
+    const guardLabel = "Public";
     return {
       guardLabel,
       guards:
